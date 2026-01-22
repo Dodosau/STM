@@ -3,7 +3,10 @@ name: STM GTFS-RT fetch
 on:
   schedule:
     - cron: "*/5 * * * *"   # toutes les 5 minutes
-  workflow_dispatch:        # permet de lancer manuellement
+  workflow_dispatch:        # lancement manuel
+  push:                     # TEMPORAIRE pour activer les cron
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -18,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          clean: false   # 🔥 empêche GitHub d'effacer ton repo
+          clean: false   # important pour éviter la suppression du repo
 
       - name: Setup Node
         uses: actions/setup-node@v4
