@@ -15,11 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-- name: Checkout
-  uses: actions/checkout@v4
-  with:
-    clean: false
-
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          clean: false   # 🔥 empêche GitHub d'effacer ton repo
 
       - name: Setup Node
         uses: actions/setup-node@v4
