@@ -2,8 +2,8 @@ name: STM GTFS-RT fetch
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-  workflow_dispatch:
+    - cron: "*/5 * * * *"   # toutes les 5 minutes
+  workflow_dispatch:        # permet de lancer manuellement
 
 permissions:
   contents: read
@@ -28,6 +28,11 @@ jobs:
           STM_API_KEY: ${{ secrets.STM_API_KEY }}
         run: node scripts/fetch-stm.mjs
 
+      - name: Debug after script
+        run: |
+          echo "CONTENU DU REPO APRÈS LE SCRIPT :"
+          ls -R .
+
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
@@ -44,7 +49,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-- name: Run STM fetch script
-  env:
-    STM_API_KEY: ${{ secrets.STM_API_KEY }}
-  run: node scripts/fetch-stm.mjs
