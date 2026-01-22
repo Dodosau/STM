@@ -44,3 +44,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+- name: Run STM fetch script
+  env:
+    STM_API_KEY: ${{ secrets.STM_API_KEY }}
+  run: node scripts/fetch-stm.mjs
